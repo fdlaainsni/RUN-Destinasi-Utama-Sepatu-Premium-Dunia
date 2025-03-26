@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        header img {
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+            justify-content: center;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav ul li {
+            position: relative;
+            padding-right: 15px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav ul li:hover {
+            background-color: #444;
+            color: white;
+            z-index: 1;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+            z-index: 1;
+        }
+
+        nav ul li a:hover {
+            color: #939191;
+            text-decoration: underline;
+            z-index: 1;
+        }
+
+        section {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Tambahkan gaya untuk dropdown */
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        nav ul li:hover ul {
+            display: block;
+        }
+
+        /* Styling untuk section Home */
+        .Home {
+            padding: 200px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* Untuk memungkinkan positioning tombol */
+        }
+
+        .Home h2 {
+            color: #333;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .Home p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Styling untuk container tombol */
+        .cta-buttons {
+            text-align: left; /* Menempatkan tombol di sebelah kanan */
+            margin-top: 20px;
+        }
+
+        /* Styling untuk tombol */
+        .cta-button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3; /* Warna saat tombol dihover */
+        }
+
+        /* Styling untuk section About */
+        .About {
+            padding: 200px;
+            background-color: #635b5b;
+            border-radius: 8px;
+            font-family: 'Times New Roman', Times, serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .About h2 {
+            color: #fefbfb;
+            position: center;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .About p {
+            color: #fefbfb;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .About ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .About ul li {
+            color: #fefbfb;
+            margin-bottom: 10px;
+        }
+
+        /* Styling untuk section Shop */
+        .Shop {
+            padding: 60px 20px; /* Padding yang lebih proporsional */
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .best-sellers {
+            text-align: center;
+            padding: 40px 0; /* Padding atas dan bawah saja */
+        }
+
+        .section-title h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333; /* Menambahkan warna untuk konsistensi */
+        }
+
+        .section-title p {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1em; /* Ukuran font yang lebih sesuai */
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px; /* Menggunakan gap untuk jarak antar item */
+        }
+
+            .product-item {
+            width: 250px;
+            background-color: #fff; /* Latar belakang putih untuk setiap produk */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Memastikan gambar tidak keluar dari border-radius */
+            text-align: left; /* Tetap rata kiri */
+        }
+
+        .product-image {
+            position: relative;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            color: #333; /* Warna teks yang lebih kontras */
+        }
+
+        .product-details {
+            padding: 15px;
+        }
+
+        .product-name {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: #333; /* Warna teks yang lebih kontras */
+        }
+
+        .product-price {
+            color: #666;
+            font-size: 1em;
+            font-weight: bold; /* Membuat harga lebih menonjol */
+        }
+
+        /* Styling untuk section Contact */
+        .Contact {
+            padding: 60px 20px;
+            background-color: #635b5b;
+            border-radius: 8px;
+            font-family: 'Times New Roman', Times, serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .contact h2 {
+            color: #fefbfb;
+            position: center;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .contact p {
+            color: #eee8e8;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .contact form {
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+    <header>
+        <img src="run.png" alt="pohon" height="100" width="120" align="center">
+    <nav>
+        <ul>
+            <li><a href="#Home">Home</a></li>
+            <li><a href="#About">About</a></li>
+            <li><a href="#Shop">Shop</a>
+                <ul>
+                    <li><a>Produk 1</a></li>
+                    <li><a>Produk 2</a></li>
+                    <li><a>Produk 3</a></li>
+                </ul>
+            </li>
+            <li><a href="#Contact">Contact</a></li>
+        </ul>
+    </nav>
+    </header>
+<body>
+    <section id="Home" class="Home">
+        <h2>RUN Destinasi Utama Sepatu Premium Dunia</h2>
+        <br>
+        <hr color="#333">
+        <br>
+        <p>
+            Selamat datang di RUN, platform e-commerce terdepan yang didedikasikan untuk para pecinta sepatu di seluruh dunia. Kami menghadirkan koleksi eksklusif sepatu dari merek-merek ternama dunia, mulai dari sepatu olahraga performa tinggi, sneakers ikonik, hingga sepatu lifestyle yang elegan.
+        </p>
+        <br>
+    <div>
+        <div class="cta-buttons">
+            <a href="https://wa.me/6289614616926?text=Saya%20ingin%20beli%20sepatu20ini!" class="cta-button" target="_blank">Beli Disini</a>
+        </div>
+    </div>
+    </section>
+    <section id="About" class="About">
+        <h2>Visi</h2>
+        <p>
+            Visi kami adalah memberdayakan sepata-sepatu yang unggul, berkualitas, dan terbaik yang dapat dijual di Dunia. Kami ingin membuat sepata-sepatu ini menjadi sepatu yang unggul dan menarik bagi kami dan masyarakat.
+        </p>
+        <h2>Misi</h2>
+        <ul>
+            <li>Meningkatkan kualitas dan kemampuan sepata-sepatu.</li>
+            <li>Mendukung pengembangan sepata-sepatu di Dunia.</li>
+            <li>Meningkatkan kesadaran masyarakat tentang sepata-sepatu.</li>
+        </ul>
+    </section>
+    <section id="Shop" class="Shop">
+        <div class="section-title">
+            <h2>Best sellers</h2>
+            <p>Discover our best sellers</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="sepatu1.jpg" alt="The Mini Collection">
+                    <span class="product-tag">Perfect Gift</span>
+                </div>
+                <div class="product-details">
+                    <p class="product-name">SNEAKERS PANARYBODY H345F</p>
+                    <p class="product-price">CHF 79.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="sepatu2.jpg" alt="The Mini Collection">
+                    <span class="product-tag">New Arrival</span>
+                </div>
+                <div class="product-details">
+                    <p class="product-name">SNEAKERS PANARYBODY H2052</p>
+                    <p class="product-price">CHF 69.00</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="sepatu3.jpg" alt="The Mini Collection">
+                    <span class="product-tag">Best Seller</span>
+                </div>
+                <div class="product-details">
+                    <p class="product-name">MEN'S CASUAL LACE-UP CONTRASTING HIGH-TOP SNEAKERS</p>
+                    <p class="product-price">CHF 85.00</p>
+                </div>
+            </div>
+    </section>
+    <section id="Contact" class="Contact">
+        <h2>Contact Us</h2>
+        <p>
+            Jl. Abdul Ghani No. 56, Kel. Kalibaru, Kec. Cilodong, Depok
+        </p>
+        <p>
+            Email: info@runsepatunomor1.com
+        </p>
+        <p>
+            Phone: +62-896-1461-6926
+        </p>
+        <div>
+            <div class="cta-buttons">
+                <a href="https://wa.me/6289614616926?text=Saya%20ingin%20mendapatkan%20informasi%20lebih%20detail!" class="cta-button" target="_blank">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
